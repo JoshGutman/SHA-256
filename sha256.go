@@ -5,6 +5,28 @@ import "fmt"
 import "strconv"
 
 func SHA256(message string) (string) {
+
+    m := preprocessing(message)
+    
+    for _, block := range(m) {
+		
+		var w [64]uint32
+
+		for t := 0; t < 16; t++ {
+			x, _ := strconv.ParseInt(block[t*32:(t*32)+32], 2, 64)
+			w[t] = uint32(x)
+		}
+		
+        for t := 16; t < 64; t++ {
+            w[t] = lsigma1(w[t-2]) + w[t-7] + lsigma0(w[t-15]) + w[t-16]
+		}
+
+		
+
+    }
+
+    
+
     return "placeholder"
 }
 
@@ -95,7 +117,11 @@ func lsigma1 (x uint32) (uint32) {
 
 func main() {
     //fmt.Printf("%s\n", padMessage("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"))
-    a := preprocessing("a")
-    fmt.Printf("%v\n", a)
-    fmt.Printf("%d\n", rotr(240, 4))
+    //a := preprocessing("a")
+    //fmt.Printf("%v\n", a)
+    //fmt.Printf("%d\n", rotr(240, 4))
+    SHA256("test")
+	
+	
 }
+
