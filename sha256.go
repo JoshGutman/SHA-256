@@ -5,6 +5,7 @@ import "fmt"
 import "strconv"
 import "os"
 
+
 func SHA256(message string) (string) {
 
     m := preprocessing(message)
@@ -91,7 +92,8 @@ func preprocessing(message string) (m []string) {
 
 func padMessage(message string) (string) {
 
-    bin := stringToBin(message)
+	//TODO - make bin a byte array,  When appending 1, just append 10000000 (128) to the last spot in bin
+	bin := stringToBin(message)
     bin += "1"
     
     var i int
@@ -156,7 +158,7 @@ func lsigma1 (x uint32) (uint32) {
 
 func main() {
     args := os.Args
-	if len(args) == 2 {
-		fmt.Println(SHA256(args[1]))
+	for i := 1; i < len(args); i++ {
+		fmt.Println(SHA256(args[i]))
 	}
 }
